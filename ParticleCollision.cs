@@ -35,6 +35,9 @@ namespace ParticleCollisionEx {
         [SerializeField]
         private string description = "Description";
 
+        [SerializeField]
+        private ParticleCollisionCallback particleCollisionCallback;
+
         #endregion
 
         #region PROPERTIES
@@ -45,6 +48,11 @@ namespace ParticleCollisionEx {
         public string Description {
             get { return description; }
             set { description = value; }
+        }
+
+        public ParticleCollisionCallback ParticleCollisionCallback {
+            get { return particleCollisionCallback; }
+            set { particleCollisionCallback = value; }
         }
 
         #endregion
@@ -72,6 +80,10 @@ namespace ParticleCollisionEx {
         private void OnCollisionStay(Collision collision) { }
 
         private void OnCollisionExit(Collision collision) { }
+
+        private void OnParticleCollision(GameObject other) {
+            ParticleCollisionCallback.Invoke(other);
+        }
 
         #endregion
 

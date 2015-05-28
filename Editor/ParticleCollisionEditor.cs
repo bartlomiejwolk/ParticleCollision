@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 namespace ParticleCollisionEx {
 
@@ -14,6 +15,7 @@ namespace ParticleCollisionEx {
         #region SERIALIZED PROPERTIES
 
         private SerializedProperty description;
+        private SerializedProperty particleCollisionCallback;
 
         #endregion SERIALIZED PROPERTIES
 
@@ -27,18 +29,25 @@ namespace ParticleCollisionEx {
 
             EditorGUILayout.Space();
 
+            DrawParticleCollisionCallbackControl();
+
             serializedObject.ApplyModifiedProperties();
         }
-
         private void OnEnable() {
             Script = (ParticleCollision)target;
 
             description = serializedObject.FindProperty("description");
+            particleCollisionCallback =
+                serializedObject.FindProperty("particleCollisionCallback");
         }
 
         #endregion UNITY MESSAGES
 
         #region INSPECTOR CONTROLS
+        private void DrawParticleCollisionCallbackControl() {
+            EditorGUILayout.PropertyField(particleCollisionCallback);
+        }
+
 
         private void DrawVersionLabel() {
             EditorGUILayout.LabelField(
