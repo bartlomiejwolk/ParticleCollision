@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿// Copyright (c) 2015 Bartlomiej Wolk (bartlomiejwolk@gmail.com)
+//  
+// This file is part of the ParticleCollision extension for Unity.
+// Licensed under the MIT license. See LICENSE file in the project root folder.
+
+using UnityEngine;
 
 namespace ParticleCollisionEx {
 
@@ -35,6 +40,9 @@ namespace ParticleCollisionEx {
         [SerializeField]
         private string description = "Description";
 
+        [SerializeField]
+        private ParticleCollisionCallback particleCollisionCallback;
+
         #endregion
 
         #region PROPERTIES
@@ -45,6 +53,11 @@ namespace ParticleCollisionEx {
         public string Description {
             get { return description; }
             set { description = value; }
+        }
+
+        public ParticleCollisionCallback ParticleCollisionCallback {
+            get { return particleCollisionCallback; }
+            set { particleCollisionCallback = value; }
         }
 
         #endregion
@@ -72,6 +85,10 @@ namespace ParticleCollisionEx {
         private void OnCollisionStay(Collision collision) { }
 
         private void OnCollisionExit(Collision collision) { }
+
+        private void OnParticleCollision(GameObject other) {
+            ParticleCollisionCallback.Invoke(other);
+        }
 
         #endregion
 
